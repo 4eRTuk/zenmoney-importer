@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zenmoney-importer"
+version = "0.1.0"
+description = "Monthly CSV import preparation tool for ZenMoney"
+requires-python = ">=3.12"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+zenmoney-import = "main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+py-modules = [
+    "main",
+    "settings",
+    "models",
+    "dates",
+    "discovery",
+    "aggregator",
+    "exporter",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
