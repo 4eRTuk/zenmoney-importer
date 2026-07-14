@@ -16,7 +16,10 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
     records: list[TransactionRecord] = []
 
     if discovered.revolut_invest is not None:
-        adapter = RevolutInvestAdapter(config.sources["revolut_invest"])
+        adapter = RevolutInvestAdapter(
+            config.sources["revolut_invest"],
+            config.categories.income,
+        )
         records.extend(adapter.parse(discovered.revolut_invest))
 
     if discovered.tradernet is not None:
