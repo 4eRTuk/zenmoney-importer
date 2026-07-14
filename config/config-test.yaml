@@ -1,0 +1,24 @@
+categories:
+  income: "Каша и дивы"
+  adjustment: "Корректировка"
+
+sources:
+  revolut_invest:
+    file_glob: "trading-account-statement_*.xlsx"
+    default_account: "Revolut Stocks"
+
+  tradernet:
+    file_glob: "tradernet_table.xlsx"
+    default_account: "ФФ KZ"
+
+manual_income_placeholders:
+  - account: "∆ Bybit"
+    comment: ""
+  - account: "∆ Wirex"
+    comment: ""
+  - account: "∆ HTX"
+    comment: ""
+  - account: "Blackcatcard"
+    comment: "4% p.a."
+  - account: "Revolut Savings EUR"
+    comment: "~2.22% APY"

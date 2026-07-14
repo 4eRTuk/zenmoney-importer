@@ -29,6 +29,11 @@ def main() -> None:
         required=True,
         help="Path to monthly folder (name must be MM_YY, e.g. ./data/07_26)",
     )
+    parser.add_argument(
+        "--config",
+        default="config/config.yaml",
+        help="Path to config file (default: config/config.yaml)",
+    )
     args = parser.parse_args()
 
     folder = Path(args.folder)
@@ -44,7 +49,7 @@ def main() -> None:
     parse_folder_name(folder.name)
 
     try:
-        config = load_config()
+        config = load_config(Path(args.config))
     except FileNotFoundError as exc:
         logger.error("%s", exc)
         sys.exit(1)
