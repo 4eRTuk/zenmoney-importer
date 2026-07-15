@@ -221,3 +221,5 @@ __marimo__/
 *.bak
 *.csv
 *.xlsx
+!tests/data/
+!tests/data/*.xlsx
