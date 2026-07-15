@@ -23,7 +23,11 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
         records.extend(adapter.parse(discovered.revolut_invest))
 
     if discovered.tradernet is not None:
-        adapter = TradernetAdapter(config.sources["tradernet"])
+        adapter = TradernetAdapter(
+            config.sources["tradernet"],
+            config.categories.income,
+            config.categories.adjustment,
+        )
         records.extend(adapter.parse(discovered.tradernet))
 
     placeholder_adapter = ManualPlaceholdersAdapter()
