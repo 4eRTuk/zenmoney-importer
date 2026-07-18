@@ -1,0 +1,105 @@
+{
+    "data": {
+        "account": {
+            "iban": null,
+            "cardNumber": "2331860058469620",
+            "availableBalance": 100.0,
+            "cardHolderFirstName": "TEST USER",
+            "cardHolderLastName": "TEST ACCOUNT",
+            "cardActivated": true
+        },
+        "movementList": [
+            {
+                "transactionDate": "2026-07-01T10:00:00.000+0000",
+                "transactionType": 4010,
+                "transactionName": "Compra: PINGO DOCE          PORTO",
+                "amount": -15.50,
+                "mcc": "5411",
+                "category": {
+                    "id": 2,
+                    "description": "Supermercado"
+                },
+                "categoryId": null,
+                "balance": 84.50
+            },
+            {
+                "transactionDate": "2026-07-05T12:30:00.000+0000",
+                "transactionType": 4010,
+                "transactionName": "Compra: MCDONALDS        PORTO",
+                "amount": -8.75,
+                "mcc": "5812",
+                "category": {
+                    "id": 1,
+                    "description": "Refeição"
+                },
+                "categoryId": null,
+                "balance": 75.75
+            },
+            {
+                "transactionDate": "2026-07-10T14:45:00.000+0000",
+                "transactionType": 4050,
+                "transactionName": "Transferência Bancária",
+                "amount": 250.00,
+                "mcc": "0",
+                "category": {
+                    "id": 5,
+                    "description": "Crédito"
+                },
+                "categoryId": null,
+                "balance": 325.75
+            },
+            {
+                "transactionDate": "2026-07-15T16:20:00.000+0000",
+                "transactionType": 4010,
+                "transactionName": "Compra: UNKNOWN SHOP     LISBON",
+                "amount": -5.99,
+                "mcc": "9999",
+                "category": {
+                    "id": 99,
+                    "description": "Unknown Category"
+                },
+                "categoryId": null,
+                "balance": 319.76
+            },
+            {
+                "transactionDate": "2026-07-20T09:15:00.000+0000",
+                "transactionType": 4010,
+                "transactionName": "Compra: CONTINENTE BOM DIA  VILA NOVA DE GAIA",
+                "amount": -22.30,
+                "mcc": "5411",
+                "category": {
+                    "id": 2,
+                    "description": "Supermercado"
+                },
+                "categoryId": null,
+                "balance": 297.46
+            },
+            {
+                "transactionDate": "2026-06-25T11:00:00.000+0000",
+                "transactionType": 4010,
+                "transactionName": "Compra: JUNE PURCHASE    PORTO",
+                "amount": -10.00,
+                "mcc": "5411",
+                "category": {
+                    "id": 2,
+                    "description": "Supermercado"
+                },
+                "categoryId": null,
+                "balance": 307.46
+            },
+            {
+                "transactionDate": "2026-08-03T13:00:00.000+0000",
+                "transactionType": 4010,
+                "transactionName": "Compra: AUGUST PURCHASE   LISBON",
+                "amount": -7.50,
+                "mcc": "5411",
+                "category": {
+                    "id": 2,
+                    "description": "Supermercado"
+                },
+                "categoryId": null,
+                "balance": 299.96
+            }
+        ]
+    }
+}
