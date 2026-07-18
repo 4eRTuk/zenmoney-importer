@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 class DiscoveredSources:
     revolut_invest: Path | None
     tradernet: Path | None
+    edenred: Path | None
 
 
 def _discover_single_source(
@@ -54,4 +55,10 @@ def discover_sources(folder: Path, config: AppConfig) -> DiscoveredSources:
             display_name="Tradernet",
             config=config,
         ),
+        edenred=_discover_single_source(
+            folder=folder,
+            source_key="edenred",
+            display_name="Edenred",
+            config=config,
+        ) if "edenred" in config.sources else None,
     )

@@ -5,20 +5,28 @@ categories:
 sources:
   revolut_invest:
     file_glob: "trading-account-statement_*.xlsx"
-    default_account: "ACCOUNT_1"
+    default_account: "REVOLUT_INVEST_ACCOUNT"
 
   tradernet:
     file_glob: "tradernet_table.xlsx"
-    default_account: "ACCOUNT_2"
+    default_account: "TRADERNET_ACCOUNT"
+
+  edenred:
+    file_glob: "edenred.json"
+    default_account: "EDENRED_ACCOUNT"
+    categories:
+      Supermercado: "Supermarket"
+      Refeição: "Cafe and restaurant"
+      Crédito: "Salary"
 
 manual_income_placeholders:
+  - account: "ACCOUNT_1"
+    comment: ""
+  - account: "ACCOUNT_2"
+    comment: ""
   - account: "ACCOUNT_3"
     comment: ""
   - account: "ACCOUNT_4"
     comment: ""
   - account: "ACCOUNT_5"
-    comment: ""
-  - account: "ACCOUNT_6"
-    comment: ""
-  - account: "ACCOUNT_7"
     comment: ""

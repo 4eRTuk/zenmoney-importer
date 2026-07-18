@@ -16,6 +16,7 @@ class CategoryConfig:
 class SourceConfig:
     file_glob: str
     default_account: str
+    categories: dict[str, str] | None = None
 
 
 @dataclass(frozen=True)
@@ -47,6 +48,7 @@ def load_config(path: Path = CONFIG_PATH) -> AppConfig:
         name: SourceConfig(
             file_glob=source["file_glob"],
             default_account=source["default_account"],
+            categories=source.get("categories") if isinstance(source, dict) else None,
         )
         for name, source in raw["sources"].items()
     }
