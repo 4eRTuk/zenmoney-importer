@@ -223,3 +223,6 @@ __marimo__/
 *.xlsx
 !tests/data/
 !tests/data/*.xlsx
+
+# Config
+config/config.yaml

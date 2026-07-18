@@ -1,24 +1,24 @@
 categories:
-  income: "Каша и дивы"
-  adjustment: "Корректировка"
+  income: "Income"
+  adjustment: "Adjustment"
 
 sources:
   revolut_invest:
     file_glob: "trading-account-statement_*.xlsx"
-    default_account: "REVOLUT_INVEST_ACCOUNT"
+    default_account: "ACCOUNT_1"
 
   tradernet:
     file_glob: "tradernet_table.xlsx"
-    default_account: "TRADERNET_ACCOUNT"
+    default_account: "ACCOUNT_2"
 
 manual_income_placeholders:
-  - account: "ACCOUNT_1"
-    comment: ""
-  - account: "ACCOUNT_2"
-    comment: ""
   - account: "ACCOUNT_3"
     comment: ""
   - account: "ACCOUNT_4"
     comment: ""
   - account: "ACCOUNT_5"
+    comment: ""
+  - account: "ACCOUNT_6"
+    comment: ""
+  - account: "ACCOUNT_7"
     comment: ""

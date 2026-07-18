@@ -20,7 +20,7 @@ def test_all_records_have_income_category(app_config):
     adapter = ManualPlaceholdersAdapter()
     records = adapter.parse("07_26", app_config)
     for record in records:
-        assert record.category == "Каша и дивы"
+        assert record.category == app_config.categories.income
 
 
 def test_all_records_have_empty_amounts(app_config):
