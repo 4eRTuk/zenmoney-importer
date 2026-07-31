@@ -19,6 +19,12 @@ sources:
       Refeição: "Cafe and restaurant"
       Crédito: "Salary"
 
+  trading_212:
+    file_glob: "from_20*.csv"
+    accounts:
+      EUR: "TRADING212_EUR_ACCOUNT"
+      USD: "TRADING212_USD_ACCOUNT"
+
 manual_income_placeholders:
   - account: "ACCOUNT_1"
     comment: ""

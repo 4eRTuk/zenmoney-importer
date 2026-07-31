@@ -12,6 +12,7 @@ class DiscoveredSources:
     revolut_invest: Path | None
     tradernet: Path | None
     edenred: Path | None
+    trading_212: Path | None
 
 
 def _discover_single_source(
@@ -61,4 +62,10 @@ def discover_sources(folder: Path, config: AppConfig) -> DiscoveredSources:
             display_name="Edenred",
             config=config,
         ) if "edenred" in config.sources else None,
+        trading_212=_discover_single_source(
+            folder=folder,
+            source_key="trading_212",
+            display_name="Trading 212",
+            config=config,
+        ) if "trading_212" in config.sources else None,
     )

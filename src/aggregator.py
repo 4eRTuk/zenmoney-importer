@@ -3,6 +3,7 @@ from pathlib import Path
 from adapters.edenred import EdenredAdapter
 from adapters.manual_placeholders import ManualPlaceholdersAdapter
 from adapters.revolut_invest import RevolutInvestAdapter
+from adapters.trading_212 import Trading212Adapter
 from adapters.tradernet import TradernetAdapter
 from dates import parse_folder_name
 from discovery import discover_sources
@@ -31,6 +32,16 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
             config.categories.adjustment,
         )
         records.extend(adapter.parse(discovered.tradernet))
+
+    if discovered.trading_212 is not None:
+        target_month, target_year = parse_folder_name(folder.name)
+        adapter = Trading212Adapter(
+            config.sources["trading_212"],
+            config.categories.income,
+            target_month=target_month,
+            target_year=target_year,
+        )
+        records.extend(adapter.parse(discovered.trading_212))
 
     if discovered.edenred is not None:
         target_month, target_year = parse_folder_name(folder.name)
