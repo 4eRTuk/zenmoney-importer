@@ -15,8 +15,8 @@ from settings import SourceConfig
 logger = logging.getLogger(__name__)
 
 CARD_OPERATION_PATTERN = re.compile(
-    r"Операция:\s*Покупка\s+с\s+нашей\s+карты\s+в\s+чужом\s+устройстве",
-    re.IGNORECASE,
+    r"Операция:\s*Покупка.*?устройстве",
+    re.IGNORECASE | re.DOTALL,
 )
 TRANSACTION_DATE_PATTERN = re.compile(
     r"Дата\s+транзакции:\s*(\d{2}\.\d{2}\.\d{4})",
@@ -25,6 +25,10 @@ TRANSACTION_DATE_PATTERN = re.compile(
 TRANSACTION_AMOUNT_PATTERN = re.compile(
     r"Сумма\s+транзакции:\s*([0-9]+(?:[.,][0-9]+)?)\s*([A-Z]{3})",
     re.IGNORECASE,
+)
+PURCHASE_BLOCK_PATTERN = re.compile(
+    r"(Дата\s+транзакции:.*?)(?=\n\s*Дата\s+транзакции:|\n\s*Итого:|\n\s*Исходящий\s+остаток:|$)",
+    re.IGNORECASE | re.DOTALL,
 )
 SKIP_PURPOSE_MARKERS = (
     "Выплата вклада с депозитного договора",
@@ -91,6 +95,12 @@ def extract_transaction_comment(payment_purpose: str) -> str | None:
         return None
 
     tail = payment_purpose.rsplit("\\", 1)[-1]
+    tail = re.split(
+        r"\s+(?:АО\s+[\"«]Фридом|Дата\s+транзакции:|Итого:|Исходящий\s+остаток:)",
+        tail,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0]
     normalized = re.sub(r"\s+", " ", tail).strip()
     return normalized or None
 
@@ -98,46 +108,33 @@ def extract_transaction_comment(payment_purpose: str) -> str | None:
 def extract_purchase_entries_from_pdf(file_path: Path) -> list[FreedomBankPurchaseEntry]:
     entries: list[FreedomBankPurchaseEntry] = []
     current_row_number = 0
-    purpose_column_index: int | None = None
 
     try:
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages:
-                tables = page.extract_tables() or []
-                for table in tables:
-                    for row in table:
-                        if not row:
-                            continue
+                page_text = page.extract_text() or ""
+                if not page_text.strip():
+                    continue
 
-                        cells = [(cell or "").strip() for cell in row]
-                        if not any(cells):
-                            continue
+                for match in PURCHASE_BLOCK_PATTERN.finditer(page_text):
+                    payment_purpose = match.group(1).strip()
+                    if not payment_purpose:
+                        continue
 
-                        if purpose_column_index is None:
-                            for idx, value in enumerate(cells):
-                                if "назначение платежа" in value.lower():
-                                    purpose_column_index = idx
-                                    break
-                            if purpose_column_index is not None:
-                                continue
-                            if len(cells) >= 10:
-                                purpose_column_index = 9
+                    for marker in (*SKIP_PURPOSE_MARKERS, "Итого:", "Исходящий остаток:"):
+                        marker_index = payment_purpose.find(marker)
+                        if marker_index != -1:
+                            payment_purpose = payment_purpose[:marker_index].strip()
+                            break
 
-                        if purpose_column_index is None or len(cells) <= purpose_column_index:
-                            continue
-
-                        payment_purpose = cells[purpose_column_index]
-                        if not payment_purpose:
-                            continue
-
-                        current_row_number += 1
-                        if is_card_purchase(payment_purpose):
-                            entries.append(
-                                FreedomBankPurchaseEntry(
-                                    row_number=current_row_number,
-                                    payment_purpose=payment_purpose,
-                                )
+                    current_row_number += 1
+                    if is_card_purchase(payment_purpose):
+                        entries.append(
+                            FreedomBankPurchaseEntry(
+                                row_number=current_row_number,
+                                payment_purpose=payment_purpose,
                             )
+                        )
     except (OSError, PDFSyntaxError, ValueError) as exc:
         logger.error("Failed to extract transactions from PDF %s: %s", file_path.name, exc)
         return []
