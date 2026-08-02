@@ -1,0 +1,10 @@
+Action,Time (UTC),ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Total,Currency (Total),Withholding tax,Currency (Withholding tax)
+Dividend (Dividend),2026-07-05 01:09:45+00:00,US0378331005,AAPL,Apple,,,1.0000000000,1.23,USD,1.00000000,1.23,USD,0.03,USD
+Dividend (Dividend),2026-07-06 01:10:42+00:00,DE0007164600,SAP,SAP,,,2.0000000000,1.17,EUR,1.00000000,2.34,EUR,0.21,EUR
+Interest on cash,2026-07-10 01:19:17+00:00,,,,Interest on cash,019f7d12-4ab9-7196-a490-2d932411a96d,,,,,0.10,USD,,
+Interest on cash,2026-07-20 01:18:50+00:00,,,,Interest on cash,019f8239-a144-7413-a88a-def1fb1f177e,,,,,0.20,USD,,
+Interest on cash,2026-07-15 14:18:12+00:00,,,,Interest on cash,019f8767-98c5-7e51-9aed-ba31f8a19ac6,,,,,0.30,EUR,,
+Buy,2026-07-11 14:44:03+00:00,US5949181045,MSFT,Microsoft,,,1.0000000000,100.00,USD,1.00000000,100.00,USD,0.00,USD
+Sell,2026-07-12 01:15:16+00:00,US5949181045,MSFT,Microsoft,,,1.0000000000,110.00,USD,1.00000000,110.00,USD,0.00,USD
+Dividend (Dividend),2026-06-30 14:44:03+00:00,US4592001014,IBM,IBM,,,1.0000000000,1.00,USD,0.86908200,1.17,EUR,0.00,USD
+Interest on cash,2026-08-01 16:04:52+00:00,,,,Interest on cash,019fa127-399a-7157-88d9-6f02883eeccb,,,,,0.40,USD,,

@@ -219,6 +219,7 @@ __marimo__/
 
 # Data
 *.bak
+*.pdf
 *.csv
 *.xlsx
 *.json
@@ -226,6 +227,8 @@ __marimo__/
 !tests/data/
 !tests/data/*.xlsx
 !tests/data/*.json
+!tests/data/*.csv
+!tests/data/*.pdf
 
 # Config
 config/config.yaml
