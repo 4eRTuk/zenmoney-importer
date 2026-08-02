@@ -4,6 +4,7 @@ from adapters.edenred import EdenredAdapter
 from adapters.freedom_bank import FreedomBankAdapter
 from adapters.manual_placeholders import ManualPlaceholdersAdapter
 from adapters.revolut_invest import RevolutInvestAdapter
+from adapters.tinkoff_broker import TinkoffBrokerAdapter
 from adapters.trading_212 import Trading212Adapter
 from adapters.tradernet import TradernetAdapter
 from dates import parse_folder_name
@@ -18,6 +19,7 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
 
     discovered = discover_sources(folder, config)
     records: list[TransactionRecord] = []
+    target_month, target_year = parse_folder_name(folder.name)
 
     if discovered.revolut_invest is not None:
         adapter = RevolutInvestAdapter(
@@ -35,7 +37,6 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
         records.extend(adapter.parse(discovered.tradernet))
 
     if discovered.trading_212 is not None:
-        target_month, target_year = parse_folder_name(folder.name)
         adapter = Trading212Adapter(
             config.sources["trading_212"],
             config.categories.income,
@@ -45,7 +46,6 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
         records.extend(adapter.parse(discovered.trading_212))
 
     if discovered.edenred is not None:
-        target_month, target_year = parse_folder_name(folder.name)
         edenred_category_mapping = (
             config.sources["edenred"].categories or {}
         )
@@ -60,6 +60,16 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
     if discovered.freedom_bank is not None:
         adapter = FreedomBankAdapter(config.sources["freedom_bank"])
         records.extend(adapter.parse(discovered.freedom_bank))
+
+    if discovered.tinkoff_broker is not None:
+        adapter = TinkoffBrokerAdapter(
+            config.sources["tinkoff_broker"],
+            config.categories.income,
+            config.categories.adjustment,
+            target_month=target_month,
+            target_year=target_year,
+        )
+        records.extend(adapter.parse(discovered.tinkoff_broker))
 
     placeholder_adapter = ManualPlaceholdersAdapter()
     records.extend(placeholder_adapter.parse(folder.name, config))

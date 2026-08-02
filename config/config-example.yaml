@@ -30,6 +30,10 @@ sources:
     default_account: "FREEDOM_BANK_ACCOUNT"
     default_category: "FREEDOM_BANK_CATEGORY"
 
+  tinkoff_broker:
+    file_glob: "Налоговый отчёт за 20*.xlsx"
+    default_account: "TINKOFF_BROKER_ACCOUNT"
+
 manual_income_placeholders:
   - account: "ACCOUNT_1"
     comment: ""

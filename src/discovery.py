@@ -14,6 +14,7 @@ class DiscoveredSources:
     edenred: Path | None
     trading_212: Path | None
     freedom_bank: Path | None
+    tinkoff_broker: Path | None
 
 
 def _discover_single_source(
@@ -75,4 +76,10 @@ def discover_sources(folder: Path, config: AppConfig) -> DiscoveredSources:
             display_name="Freedom Bank",
             config=config,
         ) if "freedom_bank" in config.sources else None,
+        tinkoff_broker=_discover_single_source(
+            folder=folder,
+            source_key="tinkoff_broker",
+            display_name="Tinkoff broker",
+            config=config,
+        ) if "tinkoff_broker" in config.sources else None,
     )
