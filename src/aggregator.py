@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from adapters.edenred import EdenredAdapter
+from adapters.freedom_bank import FreedomBankAdapter
 from adapters.manual_placeholders import ManualPlaceholdersAdapter
 from adapters.revolut_invest import RevolutInvestAdapter
 from adapters.trading_212 import Trading212Adapter
@@ -55,6 +56,10 @@ def aggregate(folder: Path, config: AppConfig | None = None) -> list[Transaction
             target_year,
         )
         records.extend(adapter.parse(discovered.edenred))
+
+    if discovered.freedom_bank is not None:
+        adapter = FreedomBankAdapter(config.sources["freedom_bank"])
+        records.extend(adapter.parse(discovered.freedom_bank))
 
     placeholder_adapter = ManualPlaceholdersAdapter()
     records.extend(placeholder_adapter.parse(folder.name, config))

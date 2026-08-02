@@ -25,6 +25,11 @@ sources:
       EUR: "TRADING212_EUR_ACCOUNT"
       USD: "TRADING212_USD_ACCOUNT"
 
+  freedom_bank:
+    file_glob: "legal_statement_*.pdf"
+    default_account: "FREEDOM_BANK_ACCOUNT"
+    default_category: "FREEDOM_BANK_CATEGORY"
+
 manual_income_placeholders:
   - account: "ACCOUNT_1"
     comment: ""

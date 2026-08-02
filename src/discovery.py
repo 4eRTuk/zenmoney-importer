@@ -13,6 +13,7 @@ class DiscoveredSources:
     tradernet: Path | None
     edenred: Path | None
     trading_212: Path | None
+    freedom_bank: Path | None
 
 
 def _discover_single_source(
@@ -68,4 +69,10 @@ def discover_sources(folder: Path, config: AppConfig) -> DiscoveredSources:
             display_name="Trading 212",
             config=config,
         ) if "trading_212" in config.sources else None,
+        freedom_bank=_discover_single_source(
+            folder=folder,
+            source_key="freedom_bank",
+            display_name="Freedom Bank",
+            config=config,
+        ) if "freedom_bank" in config.sources else None,
     )
